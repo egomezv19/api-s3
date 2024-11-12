@@ -1,11 +1,10 @@
 import boto3
-import json
 
 def lambda_handler(event, context):
-    # Decodificar el cuerpo JSON
-    body = json.loads(event['body'])
-    bucket_name = body['bucket_name']
-    
+    # Obtener el nombre del bucket directamente desde event['body'] sin usar json
+    body = event['body']
+    bucket_name = eval(body)['bucket_name']  # Utiliza eval() para extraer el campo bucket_name del string JSON
+
     # Crear cliente de S3
     s3 = boto3.client('s3')
     
@@ -20,8 +19,5 @@ def lambda_handler(event, context):
     # Retornar la respuesta
     return {
         'statusCode': 200,
-        'body': json.dumps({
-            'message': f'Bucket {bucket_name} creado exitosamente',
-            'Location': response.get('Location')
-        })
+        'body': f'Bucket {bucket_name} creado exitosamente'
     }
