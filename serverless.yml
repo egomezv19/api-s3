@@ -22,6 +22,7 @@ functions:
           integration: lambda
   lista_objetos_bucket:
     handler: lista_objetos_bucket.lambda_handler
+    memorySize: 512
     events:
       - http:
           path: /s3/bucket/lista-objetos
@@ -30,6 +31,7 @@ functions:
           integration: lambda
   crear_bucket:
     handler: crear_bucket.lambda_handler
+    memorySize: 512
     events:
       - http:
           path: /s3/bucket/crear
@@ -39,6 +41,7 @@ functions:
 
   crear_directorio:
     handler: crear_directorio.lambda_handler
+    memorySize: 512
     events:
       - http:
           path: /s3/bucket/crear-directorio
@@ -48,6 +51,7 @@ functions:
 
   subir_archivo:
     handler: subir_archivo.lambda_handler
+    memorySize: 512
     events:
       - http:
           path: /s3/bucket/subir-archivo
