@@ -1,10 +1,9 @@
 import boto3
 
 def lambda_handler(event, context):
-    # Obtener el nombre del bucket directamente desde event['body'] sin usar json
-    body = event['body']
-    bucket_name = eval(body)['bucket_name']  # Utiliza eval() para extraer el campo bucket_name del string JSON
-
+    # Suponemos que el bucket_name está en event['body']['bucket_name']
+    bucket_name = event['body']['bucket_name']
+    
     # Crear cliente de S3
     s3 = boto3.client('s3')
     
