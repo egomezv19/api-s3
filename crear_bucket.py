@@ -1,22 +1,18 @@
 import boto3
 
 def lambda_handler(event, context):
-    # Suponemos que el bucket_name está en event['body']['bucket_name']
-    bucket_name = event['body']['bucket_name']
+    # Entrada (json)
+    nombre_bucket = event['body']['bucket']
     
-    # Crear cliente de S3
+    # Proceso
     s3 = boto3.client('s3')
     
-    # Crear el bucket
     response = s3.create_bucket(
-        Bucket=bucket_name,
-        CreateBucketConfiguration={
-            'LocationConstraint': 'us-east-1'  # Cambia la región si es necesario
-        }
+        Bucket=nombre_bucket
     )
     
-    # Retornar la respuesta
     return {
         'statusCode': 200,
-        'body': f'Bucket {bucket_name} creado exitosamente'
+        'bucket': nombre_bucket,
+        'response': response
     }

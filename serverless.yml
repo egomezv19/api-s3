@@ -3,9 +3,8 @@ service: api-s3
 
 provider:
   name: aws
-  runtime: python3.12	
-  # Default memory size for functions (default: 256MB)
-  memorySize: 256
+  runtime: python3.12
+  memorySize: 256  # Tamaño de memoria predeterminado para todas las funciones
   timeout: 30
   iam:
     role: arn:aws:iam::353553552499:role/LabRole
@@ -20,6 +19,7 @@ functions:
           method: get
           cors: true
           integration: lambda
+
   lista_objetos_bucket:
     handler: lista_objetos_bucket.lambda_handler
     memorySize: 512
@@ -28,7 +28,8 @@ functions:
           path: /s3/bucket/lista-objetos
           method: post
           cors: true
-          integration: lambda
+          integration: lambda  
+
   crear_bucket:
     handler: crear_bucket.lambda_handler
     memorySize: 512
@@ -58,4 +59,3 @@ functions:
           method: post
           cors: true
           integration: lambda
-
